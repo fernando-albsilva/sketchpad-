@@ -69,6 +69,18 @@ main>div>nav {
     gap: 15px;
 }
 
+main>div>nav>input[type="color"] {
+    background-color: var(--yellow);
+    box-shadow: var(--shadow);
+    height: 36px;
+    width: 100%;
+    padding: 5px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 main>div>nav button.nav-button {
     background-color: var(--yellow);
     box-shadow: var(--shadow);
@@ -79,6 +91,29 @@ main>div>nav button.nav-button {
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+}
+
+main>div>nav>input[type="range"] {
+    margin-top: 10px;
+    -webkit-appearance: none;
+    width: calc(100% - 6px);
+    height: 10px;
+    background: #d3d3d3;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 4px;
+}
+
+main>div>nav>input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--yellow);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    border-radius: 50px;
 }
 
 main>div>:nth-child(2) {
@@ -165,7 +200,7 @@ main>div>:nth-child(3)>section>div:nth-child(5) {
     background-color: var(--dark-gray);
     top: 372px;
     left: 63px;
-    clip-path: polygon(0 0,100% 0, 50% 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
     box-shadow: var(--shadow);
 }
 
