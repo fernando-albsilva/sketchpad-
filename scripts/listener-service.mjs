@@ -1,16 +1,11 @@
 import { CreatorService } from "./creator-service.mjs";
+import { ElementService } from "./element-service.mjs";
 
 export class ListenerService {
-    constructor() {}
-
-    get rangeElement() {
-        return document.querySelector("#range-input");
+    constructor() {
+        this.creatorService = new CreatorService();
+        this.elementService = new ElementService();
     }
-    
-    get clearButtonElement() {
-        return document.querySelector("#clear-button");
-    }
-    
     
     initialize() {
         this.registerListeners() 
@@ -22,14 +17,14 @@ export class ListenerService {
     }
 
     registerRangeListener() {
-        this.rangeElement
+        this.elementService.rangeElement
             .addEventListener('input', (value) => {
                 this.handleRangeChange(value.currentTarget.value);
             });
     }
 
     registerClearListener() {
-        this.clearButtonElement
+        this.elementService.clearButtonElement
         .addEventListener('click', () => {
             this.handleClearClick();
         });
@@ -44,8 +39,7 @@ export class ListenerService {
     }
 
     createNewGrid(value) {
-        const creatorService = new CreatorService(value * 16);
-        creatorService.resetGrid();
-        creatorService.createDrawingGrid();
+        this.creatorService.resetGrid();
+        this.creatorService.createDrawingGrid(value * 16);
     }
 }
