@@ -13,6 +13,7 @@ export class ListenerService {
 
     registerListeners() {
         this.registerRangeListener()
+        this.registerFillListener()
         this.registerPenListener()
         this.registerEraserListener()
         this.registerClearListener()
@@ -22,6 +23,13 @@ export class ListenerService {
         this.elementService.rangeElement
             .addEventListener('input', (value) => {
                 this.handleRangeChange(value.currentTarget.value);
+            });
+    }
+
+    registerFillListener() {
+        this.elementService.fillButtonElement
+            .addEventListener('click', () => {
+                this.handleFillClick();
             });
     }
 
@@ -49,6 +57,10 @@ export class ListenerService {
     handleRangeChange(value) {
         window.mySketchpadConfiguration.gridSize = value * 16;
         this.createNewGrid();
+    }
+
+    handleFillClick() {
+        window.mySketchpadConfiguration.option = 'fill';
     }
 
     handlePenClick() {

@@ -27,6 +27,8 @@ export class CreatorService {
             this.setListener(div);
             this.addItemInGridContainer(div);
         })
+
+        this.setContainerListener()
     }
 
     createDiv() {
@@ -62,10 +64,22 @@ export class CreatorService {
                     default:
                         break;
                 }
-
-            
             }
         });
+    }
+
+    setContainerListener() {
+        this.elementService.gridContainerElement.addEventListener('click', (event) => {
+            if (window.mySketchpadConfiguration.option === 'fill') {
+                this.actionFill()
+            }
+        });
+    }
+    
+
+    actionFill() {
+        const children = Array.from(this.elementService.gridContainerElement.children);
+        children.forEach(element => {element.style.backgroundColor = this.elementService.colorPickerElement.value;})
     }
 
     actionPen(event) {
