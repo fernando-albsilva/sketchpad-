@@ -42,6 +42,7 @@ export class CreatorService {
         properties += properties.concat('color: blue;');
         properties += properties.concat('border: 0.5px solid #cfcdcd;')
         properties += properties.concat(`flex: 1 0 ${basis}%;`)
+        properties += properties.concat(`user-select: none;`)
 
         div.setAttribute('style', properties);
         return div;
