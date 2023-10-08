@@ -131,6 +131,8 @@ main>div>:nth-child(2)>section {
     width: 100%;
     border-radius: 4px;
     box-shadow: var(--shadow-inset);
+    flex-wrap: wrap;
+    padding: 3px;
 }
 
 main>div>:nth-child(3) {
