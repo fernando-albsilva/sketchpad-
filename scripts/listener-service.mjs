@@ -69,26 +69,45 @@ export class ListenerService {
 
     handleRainbowClick() {
         window.mySketchpadConfiguration.option = 'rainbow';
+        this.removeDisabledClass();
+        this.addDisabledClass(this.elementService.rainbowButtonElement);
     }
 
     handlePenClick() {
         window.mySketchpadConfiguration.option = 'pen';
+        this.removeDisabledClass();
+        this.addDisabledClass(this.elementService.penButtonElement);
     }
 
     handleFillClick() {
         window.mySketchpadConfiguration.option = 'fill';
+        this.removeDisabledClass();
+        this.addDisabledClass(this.elementService.fillButtonElement);
     }
     
     handleEraserClick() {
         window.mySketchpadConfiguration.option = 'eraser';
+        this.removeDisabledClass();
+        this.addDisabledClass(this.elementService.eraserButtonElement);
     }
 
     handleClearClick() {
         this.createNewGrid()
     }
 
-    createNewGrid(value) {
+    createNewGrid() {
         this.creatorService.resetGrid();
         this.creatorService.createDrawingGrid();
+    }
+
+    removeDisabledClass() {
+        this.elementService.fillButtonElement.classList.remove("disabled");
+        this.elementService.eraserButtonElement.classList.remove("disabled");
+        this.elementService.penButtonElement.classList.remove("disabled");
+        this.elementService.rainbowButtonElement.classList.remove("disabled");
+    }
+
+    addDisabledClass(element) {
+        element.classList.add("disabled");
     }
 }
