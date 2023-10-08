@@ -13,6 +13,8 @@ export class ListenerService {
 
     registerListeners() {
         this.registerRangeListener()
+        this.registerPenListener()
+        this.registerEraserListener()
         this.registerClearListener()
     }
 
@@ -20,6 +22,20 @@ export class ListenerService {
         this.elementService.rangeElement
             .addEventListener('input', (value) => {
                 this.handleRangeChange(value.currentTarget.value);
+            });
+    }
+
+    registerPenListener() {
+        this.elementService.penButtonElement
+            .addEventListener('click', () => {
+                this.handlePenClick();
+            });
+    }
+
+    registerEraserListener() {
+        this.elementService.eraserButtonElement
+            .addEventListener('click', () => {
+                this.handleEraserClick();
             });
     }
 
@@ -31,15 +47,24 @@ export class ListenerService {
     }
     
     handleRangeChange(value) {
-       this.createNewGrid(value);
+        window.mySketchpadConfiguration.gridSize = value * 16;
+        this.createNewGrid();
+    }
+
+    handlePenClick() {
+        window.mySketchpadConfiguration.option = 'pen';
+    }
+    
+    handleEraserClick() {
+        window.mySketchpadConfiguration.option = 'eraser';
     }
 
     handleClearClick() {
-        this.createNewGrid(this.rangeElement.value)
+        this.createNewGrid()
     }
 
     createNewGrid(value) {
         this.creatorService.resetGrid();
-        this.creatorService.createDrawingGrid(value * 16);
+        this.creatorService.createDrawingGrid();
     }
 }

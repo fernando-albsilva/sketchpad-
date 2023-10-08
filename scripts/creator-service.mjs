@@ -2,11 +2,9 @@ import { ElementService } from "./element-service.mjs";
 
 export class CreatorService {
 
-    constructor(gridSize) {
-        this.gridSize = gridSize;
+    constructor() {
         this.drawingElements = [];
         this.elementService = new ElementService();
-        //this.drawingContainerElement = this.elementService.getGridContainer()
     }
 
     resetGrid() {
@@ -14,9 +12,9 @@ export class CreatorService {
        children.forEach(element => element.remove())
     }
 
-    createDrawingGrid(gridSize) {
-        const gridRows = gridSize ?? this.gridSize;  
-        const gridColumns = gridSize ?? this.gridSize;
+    createDrawingGrid() {
+        const gridRows = window.mySketchpadConfiguration.gridSize;  
+        const gridColumns = window.mySketchpadConfiguration.gridSize;
 
         const iteration = Array.from(
             { length: (gridRows * gridColumns) }
@@ -25,7 +23,7 @@ export class CreatorService {
 
         iteration.forEach(index => {
             let div = this.createDiv();
-            div = this.applyStyleInGridItem(div, gridSize ?? this.gridSize);
+            div = this.applyStyleInGridItem(div);
             this.setListener(div);
             this.addItemInGridContainer(div);
         })
@@ -35,8 +33,8 @@ export class CreatorService {
         return document.createElement('div');
     }
 
-    applyStyleInGridItem(div, gridSize) {
-        const basis = 100 / gridSize;
+    applyStyleInGridItem(div) {
+        const basis = 100 / window.mySketchpadConfiguration.gridSize;
 
         let properties = '';
         properties += properties.concat('color: blue;');
@@ -51,9 +49,31 @@ export class CreatorService {
         div.addEventListener('mouseover', (event) => {
             const isMouseClicked = event.buttons === 1;
             if (isMouseClicked) {
-                event.srcElement.style.backgroundColor = this.elementService.colorPickerElement.value;
+
+                switch (window.mySketchpadConfiguration.option) {
+                    case 'pen': 
+                        this.actionPen(event)
+                        break;
+
+                    case 'eraser': 
+                        this.actionEraser(event)
+                        break;
+
+                    default:
+                        break;
+                }
+
+            
             }
         });
+    }
+
+    actionPen(event) {
+        event.srcElement.style.backgroundColor = this.elementService.colorPickerElement.value;
+    }
+
+    actionEraser(event) {
+        event.srcElement.style.backgroundColor = '';
     }
 
     addItemInGridContainer(div) {
@@ -63,11 +83,4 @@ export class CreatorService {
     removeItemFromGridContainer(div) {
         this.elementService.gridContainerElement.removeChild(div);
     }
-
-    // getGridContainer() {
-    //     const mainElement = document.querySelector('main')
-    //     const drawingContainerElement =
-    //         mainElement?.firstElementChild?.querySelector('div')?.firstElementChild;
-    //     return drawingContainerElement;
-    // }
 }
