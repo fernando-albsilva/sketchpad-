@@ -6,6 +6,11 @@ export class CreatorService {
         this.drawingContainerElement = this.getGridContainer()
     }
 
+    resetGrid() {
+       const children = Array.from(this.drawingContainerElement.children);
+       children.forEach(element => element.remove())
+    }
+
     createDrawingGrid() {
         const iteration = Array.from(
             { length: (this.gridSize * this.gridSize) }
@@ -14,7 +19,8 @@ export class CreatorService {
 
         iteration.forEach(index => {
             let div = this.createDiv();
-            div = this.ApplyStyleInGridItem(div);
+            div = this.applyStyleInGridItem(div);
+            this.setListener(div);
             this.addItemInGridContainer(div);
         })
     }
@@ -23,7 +29,7 @@ export class CreatorService {
         return document.createElement('div');
     }
 
-    ApplyStyleInGridItem(div) {
+    applyStyleInGridItem(div) {
         const basis = 100 / this.gridSize;
 
         let properties = '';
@@ -32,8 +38,16 @@ export class CreatorService {
         properties += properties.concat(`flex: 1 0 ${basis}%;`)
 
         div.setAttribute('style', properties);
-
         return div;
+    }
+
+    setListener(div) {
+        div.addEventListener('mouseover', (event) => {
+            const isMouseClicked = event.buttons === 1;
+            if (isMouseClicked) {
+                event.srcElement.style.backgroundColor = 'black';
+            }
+        });
     }
 
     addItemInGridContainer(div) {

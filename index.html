@@ -17,13 +17,20 @@
         <div>
 
             <nav>
-                <input type="color">
+                <input id='color-picker-input' type="color">
                 <button class="nav-button">Color</button>
                 <button class="nav-button">Rainbow</button>
                 <button class="nav-button">Fill</button>
                 <button class="nav-button">Eraser</button>
-                <button class="nav-button">Clear</button>
-                <input type="range" min="1" max="64" value="50">
+                <button id="clear-button" class="nav-button">Clear</button>
+                <input 
+                    id='range-input' 
+                    type="range" 
+                    min="1" 
+                    max="4" 
+                    value="1" 
+                    step="1"
+                >
             </nav>
 
             <div>
@@ -38,7 +45,6 @@
                     <div></div>
                     <div></div>
                     <div></div>
-
                 </section>
             </div>
 
