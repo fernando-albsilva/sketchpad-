@@ -5,12 +5,16 @@ export class ElementService {
         return document.querySelector("#color-picker-input");
     }
 
-    get fillButtonElement() {
-        return document.querySelector("#fill-button");
-    }
-
     get penButtonElement() {
         return document.querySelector("#pen-button");
+    }
+
+    get rainbowButtonElement() {
+        return document.querySelector("#rainbow-button");
+    }
+
+    get fillButtonElement() {
+        return document.querySelector("#fill-button");
     }
 
     get eraserButtonElement() {

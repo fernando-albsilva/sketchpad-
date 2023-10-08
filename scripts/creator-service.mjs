@@ -61,6 +61,10 @@ export class CreatorService {
                         this.actionEraser(event)
                         break;
 
+                    case 'rainbow': 
+                        this.actionRainbow(event)
+                        break;
+
                     default:
                         break;
                 }
@@ -76,14 +80,24 @@ export class CreatorService {
         });
     }
     
+    actionPen(event) {
+        event.srcElement.style.backgroundColor = this.elementService.colorPickerElement.value;
+    }
+
+    actionRainbow(event) {
+        event.srcElement.style.backgroundColor = 
+            window.rainbowColors[window.mySketchpadConfiguration.rainbowIndex]    
+        
+            if (window.rainbowColors.length - 1 > window.mySketchpadConfiguration.rainbowIndex) {
+                window.mySketchpadConfiguration.rainbowIndex++;
+            } else {
+                window.mySketchpadConfiguration.rainbowIndex = 0;
+            }
+    }
 
     actionFill() {
         const children = Array.from(this.elementService.gridContainerElement.children);
         children.forEach(element => {element.style.backgroundColor = this.elementService.colorPickerElement.value;})
-    }
-
-    actionPen(event) {
-        event.srcElement.style.backgroundColor = this.elementService.colorPickerElement.value;
     }
 
     actionEraser(event) {

@@ -13,8 +13,9 @@ export class ListenerService {
 
     registerListeners() {
         this.registerRangeListener()
-        this.registerFillListener()
         this.registerPenListener()
+        this.registerRainbowListener()
+        this.registerFillListener()
         this.registerEraserListener()
         this.registerClearListener()
     }
@@ -26,17 +27,24 @@ export class ListenerService {
             });
     }
 
-    registerFillListener() {
-        this.elementService.fillButtonElement
-            .addEventListener('click', () => {
-                this.handleFillClick();
-            });
-    }
-
     registerPenListener() {
         this.elementService.penButtonElement
             .addEventListener('click', () => {
                 this.handlePenClick();
+            });
+    }
+    
+    registerRainbowListener() {
+        this.elementService.rainbowButtonElement
+            .addEventListener('click', () => {
+                this.handleRainbowClick();
+            });
+    }
+
+    registerFillListener() {
+        this.elementService.fillButtonElement
+            .addEventListener('click', () => {
+                this.handleFillClick();
             });
     }
 
@@ -59,12 +67,16 @@ export class ListenerService {
         this.createNewGrid();
     }
 
-    handleFillClick() {
-        window.mySketchpadConfiguration.option = 'fill';
+    handleRainbowClick() {
+        window.mySketchpadConfiguration.option = 'rainbow';
     }
 
     handlePenClick() {
         window.mySketchpadConfiguration.option = 'pen';
+    }
+
+    handleFillClick() {
+        window.mySketchpadConfiguration.option = 'fill';
     }
     
     handleEraserClick() {
